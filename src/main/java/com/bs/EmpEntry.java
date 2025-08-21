@@ -13,9 +13,8 @@ public class EmpEntry {
     private SessionFactory sessionFactory;
 	public void saveData(Emp emp)
 	{
-		ApplicationContext context=new ClassPathXmlApplicationContext("info.xml");
-		SessionFactory sf =context.getBean("sessionFactory",SessionFactory.class);
-	    Session ss=sf.openSession();
+		
+	    Session ss=sessionFactory.openSession();
 	    Transaction tr=ss.beginTransaction();
 	    ss.save(emp);
 	    tr.commit();
@@ -25,8 +24,10 @@ public class EmpEntry {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-      Emp e1=new Emp(777,"abc","cse","executive",1000000);
-      EmpEntry empEntry=new EmpEntry();
+		
+		ApplicationContext context=new ClassPathXmlApplicationContext("info.xml");
+        EmpEntry empEntry = context.getBean("empEntry",EmpEntry.class);
+      Emp e1=new Emp(888,"abc","cse","executive",1000000);
       empEntry.saveData(e1);
       
 	}

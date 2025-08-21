@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
-        
-        
-<!--         <bean id="sessionFactory" class="com.bs.Utility" factory-method="getSessionFactory"/> -->
-            <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-            <property name="dataSource" ref="ds"/>
-            <property name="packagesToScan" value="com.bs"/>
-            <property name="hibernateProperties">
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Enable annotation processing -->
+    <context:annotation-config/>
+<bean id="empEntry" class="com.bs.EmpEntry"></bean>
+    <!-- SessionFactory bean -->
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="ds"/>
+        <property name="packagesToScan" value="com.bs"/>
+        <property name="hibernateProperties">
             <props>
-            <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
-            <prop key="hibarnate.hbm2ddl.auto">update</prop>
-            <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
             </props>
-            </property>
-            </bean>
-            
-            
-            <bean id="ds" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-            <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
-            <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hdata1"/>
-            <property name="user" value="root"/>
-            <property name="password" value="root"/>
-            </bean>
-            
-            
-            
+        </property>
+    </bean>
+
+    <!-- DataSource bean -->
+    <bean id="ds" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hdata1"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
 </beans>
- 
